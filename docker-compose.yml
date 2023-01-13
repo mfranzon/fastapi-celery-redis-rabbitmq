@@ -8,7 +8,9 @@ services:
         ports:
             - "5672:5672"
     worker:
-        image: karthikasasanka/shopping-celery:v1
+        build: 
+          context: .
+          dockerfile: celery.Dockerfile
         environment:
             - REDIS_HOST=kredis
             - REDIS_PORT=6379
@@ -27,7 +29,9 @@ services:
         ports:
             - "6379:6379"
     api:
-        image: karthikasasanka/shopping-api:v1
+        build: 
+          context: .
+          dockerfile: api.Dockerfile
         environment:
             - REDIS_HOST=kredis
             - REDIS_PORT=6379
@@ -44,7 +48,9 @@ services:
         ports:
             - "5000:5000"
     flower:
-        image: karthikasasanka/shopping-celery-flower:v1
+        build: 
+          context: .
+          dockerfile: flower.Dockerfile
         environment:
             - REDIS_HOST=kredis
             - REDIS_PORT=6379
